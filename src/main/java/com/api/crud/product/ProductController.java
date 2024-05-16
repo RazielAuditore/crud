@@ -1,8 +1,7 @@
 package com.api.crud.product;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -12,19 +11,23 @@ import java.util.List;
 @RequestMapping(path="api/v1/Product")
 
 public class ProductController {
+    private final ProductService productService;
+
+
+    @Autowired
+
+    public ProductController(ProductService productService){
+        this.productService=productService;
+
+
+    }
     @GetMapping
-public List<Product> getProduct(){
-    return List.of(
-            new Product(
-                    25L,
-                    "cuchillo",
-                    500,
-                    LocalDate.of(2024, Month.MARCH,5),
-                    2
+    public List<Product>getProducts(){
+        return productService.getProduct();
+    }
+    @PostMapping
+    public void registrarProducto(@RequestBody Product product){
+        this.productService.newProduct(product);
+    }
 
-            ));
-
-
-
-}
 }

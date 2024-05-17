@@ -1,6 +1,7 @@
 package com.api.crud.product;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -26,8 +27,21 @@ public class ProductController {
         return productService.getProduct();
     }
     @PostMapping
-    public void registrarProducto(@RequestBody Product product){
-        this.productService.newProduct(product);
+    public ResponseEntity<Object> registrarProducto(@RequestBody Product product){
+        return this.productService.newProduct(product);
+    }
+    @PutMapping
+    public ResponseEntity<Object> actualizarProducto(@RequestBody Product product){
+        return this.productService.newProduct(product);
+    }
+    @DeleteMapping(path="{productId}")
+    public ResponseEntity<Object>eliminar(@PathVariable("productId") Long id ){
+        return this.productService.DeleteProduct(id);
+
     }
 
+
+
+
 }
+

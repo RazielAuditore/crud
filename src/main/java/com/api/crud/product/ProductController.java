@@ -23,10 +23,13 @@ public class ProductController {
 
     }
     @GetMapping
+
     public List<Product>getProducts(){
         return productService.getProduct();
     }
+
     @PostMapping
+
     public ResponseEntity<Object> registrarProducto(@RequestBody Product product){
         return this.productService.newProduct(product);
     }
